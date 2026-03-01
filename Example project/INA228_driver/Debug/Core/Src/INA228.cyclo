@@ -1,0 +1,7 @@
+../Core/Src/INA228.c:15:19:INA228_Reset	2
+../Core/Src/INA228.c:37:19:INA228_Config	4
+../Core/Src/INA228.c:124:19:INA228_Init	2
+../Core/Src/INA228.c:147:19:INA228_ReadShuntVoltage	2
+../Core/Src/INA228.c:171:19:INA228_ReadCurrent	3
+../Core/Src/INA228.c:201:19:INA228_ReadPower	2
+../Core/Src/INA228.c:225:19:INA228_ReadBusVoltage	3
