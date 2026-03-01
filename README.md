@@ -20,7 +20,7 @@ The driver was tested on:
 - STM32L476RG Nucleo devboard
 - Adafruit's INA228 sensor board
 
-![INA228 board](Images/Hardware.png)
+![INA228 board](Images/Hardware.jpeg)
 
 # Demo
 
