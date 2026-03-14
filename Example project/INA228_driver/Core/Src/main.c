@@ -138,7 +138,7 @@ int main(void)
   }
 
 
-int indx = 0;
+int idx = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -147,16 +147,24 @@ int indx = 0;
   {
 
 	  ///// print measured values
-
 	  float current;
 	  float vbus;
 	  float power_measured;
-	  if (INA228_ReadCurrent(&INA228_v1, &current) == HAL_OK)
-		  if(INA228_ReadBusVoltage(&INA228_v1, &vbus)== HAL_OK)
-			  	if(INA228_ReadPower(&INA228_v1, &power_measured)==HAL_OK)
-			  	{
-					  printf("indx: %4d current: %2.8f vbus: %2.8f power_m: %2.8f\r\n", indx++, current,vbus,power_measured);
-			  	}
+	  float temp;
+
+
+	   ////// Check if read operations succeed
+	  if (	(INA228_ReadCurrent(&INA228_v1, &current) == HAL_OK) &&
+			  (INA228_ReadBusVoltage(&INA228_v1, &vbus)== HAL_OK) &&
+			  (INA228_ReadPower(&INA228_v1, &power_measured)==HAL_OK)&&
+			  (INA228_ReadDieTemp(&INA228_v1, &temp)== HAL_OK) )
+		{
+		  printf("idx: %4d current: %2.8f vbus: %2.8f power_m: %2.8f temp: %2.3f *C\r\n", idx++, current,vbus,power_measured, temp);
+		}
+	  else
+	  {
+		  printf("INA228 Read ERR");
+	  }
 
 	  HAL_Delay(100);
 

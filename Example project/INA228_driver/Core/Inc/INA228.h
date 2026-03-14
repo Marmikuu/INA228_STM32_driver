@@ -24,7 +24,7 @@
 #define CONFIG 0x00 // Configuration 		 16 bit size
 #define ADC_CONFIG 0x01 // ADC configuration 16 bit
 #define SHUNT_CAL 0x02 /// Shunt Calibration  16 bit
-#define SHUNT_TEMPCO 0x03 // Shunt Temperature Coefficient 16
+#define SHUNT_TEMPCO 0x03 // Shunt Temperature Coefficient 16 bit
 
 //// Measurement registers
 #define VSHUNT 0x04 /// Shunt Voltage Measurement 24 bit // + or -
@@ -125,7 +125,7 @@ HAL_StatusTypeDef INA228_ReadShuntVoltage(INA228_Handle_t *hina228, float *shunt
 HAL_StatusTypeDef INA228_ReadCurrent(INA228_Handle_t *hina228, float *current);
 HAL_StatusTypeDef INA228_ReadPower(INA228_Handle_t *hina228, float *power);
 HAL_StatusTypeDef INA228_ReadBusVoltage(INA228_Handle_t *hina228, float *bus_voltage);
-
+HAL_StatusTypeDef INA228_ReadDieTemp(INA228_Handle_t *hina228, float *temp);
 
 //// DIAGNOSTIC FLAGS (To be continued)
 #endif

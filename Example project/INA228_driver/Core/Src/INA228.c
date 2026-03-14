@@ -1,14 +1,14 @@
 /**
 *
 *	Created on: Nov 4, 2025
-*	Modified on: Mar 1 2026
+*	Modified on: Mar 14 2026
 *
-*	INA 228 sensor driver for STM32
+*	INA 228 sensor driver for STM32 MCU
 *
 *	Author: Marcin Mikula
 *	github.com/Marmikuu
 *
-*	version 1.1
+*	version 1.2
 *
 */
 
@@ -38,19 +38,11 @@ HAL_StatusTypeDef INA228_Reset(INA228_Handle_t *hina228)
 }
 
 
-
-
 HAL_StatusTypeDef INA228_Config(INA228_Handle_t *hina228)
 {
-//////// INA 228 RESET first
 	if (INA228_Reset(hina228)!=HAL_OK)
 	{
-		// printf("INA228 reset: ERR\r\n"); /// DEBUG
 		return HAL_ERROR;
-	}
-	else
-	{
-		// printf("INA228 reset: OK\r\n"); /// DEBUG
 	}
 
 	float current_LSB = hina228->max_current_Amps/524288.f;
@@ -68,27 +60,6 @@ HAL_StatusTypeDef INA228_Config(INA228_Handle_t *hina228)
         return HAL_ERROR;
     }
 
-
-    /* 		DEBUG - reading from SHUNT_CAL register
-     *
-     *
-    uint8_t cfg_read[2];
-
-    if (HAL_I2C_Mem_Read(hina228->hi2c, (hina228->i2c_addr<<1), SHUNT_CAL,
-            I2C_MEMADD_SIZE_8BIT, cfg_read, 2, 500) == HAL_OK)
-    {
-        uint16_t cfg_val = (cfg_read[0]<<8) | cfg_read[1];
-
-    //    printf("CONFIG SHUNT_CAL readback = 0x%04X\r\n", cfg_val); DEBUG
-
-    } else {
-
-        printf("Readback CONFIG failed\r\n");
-
-    }
-     */
-
-
     uint16_t config_value = (hina228 -> mode << 12) | /// Operating mode
     		(hina228->conv_time_vbus_vshunt << 9) |		/// vbus conversion time
     		(hina228->conv_time_vbus_vshunt << 6)  | /// vshunt conv. time
@@ -103,23 +74,6 @@ HAL_StatusTypeDef INA228_Config(INA228_Handle_t *hina228)
     {
         return HAL_ERROR;
     }
-
-
-    /*
-     *   		DEBUG - reading from ADC_CONFIG register
-     *
-    uint8_t cfg_read2[2];
-    if (HAL_I2C_Mem_Read(hina228->hi2c, (hina228->i2c_addr<<1), ADC_CONFIG,
-            I2C_MEMADD_SIZE_8BIT, cfg_read2, 2, 500) == HAL_OK)
-    {
-        uint16_t cfg_val2 = (cfg_read2[0]<<8) | cfg_read2[1];
-        printf("CONFIG ADC_CONIFG readback = 0x%04X\r\n", cfg_val2);
-    } else {
-        printf("Readback CONFIG failed\r\n");
-    }
-     */
-
-
 
     return HAL_OK;
 
@@ -160,8 +114,6 @@ HAL_StatusTypeDef INA228_ReadShuntVoltage(INA228_Handle_t *hina228, float *volta
     {
       return HAL_ERROR;
     }
-
-    ///// skladanie bajtow
     vShuntRaw = (data[0] << 8) | data[1];
 
 	float vShunt_LSB = 312.5e-9f;
@@ -226,8 +178,6 @@ HAL_StatusTypeDef INA228_ReadPower(INA228_Handle_t *hina228, float *power)
 }
 
 
-
-
 HAL_StatusTypeDef INA228_ReadBusVoltage(INA228_Handle_t *hina228, float *voltage)
 {
     uint32_t vBus_raw;
@@ -259,3 +209,24 @@ HAL_StatusTypeDef INA228_ReadBusVoltage(INA228_Handle_t *hina228, float *voltage
 }
 
 
+
+HAL_StatusTypeDef INA228_ReadDieTemp(INA228_Handle_t *hina228, float *temp)
+{
+	uint16_t temp_raw;
+	int16_t temp_signed;
+	uint8_t data[2];
+
+	if (HAL_I2C_Mem_Read(hina228->hi2c, (hina228->i2c_addr)<<1,DIETEMP , I2C_MEMADD_SIZE_8BIT, data, 2, 1000) != HAL_OK)
+	{
+		return HAL_ERROR;
+	}
+
+	temp_raw = ((uint16_t)data[0] << 8 | (uint16_t)data[1]); /// MSB first
+	temp_signed = (int16_t)temp_raw;
+
+	float temp_LSB = 0.0078125f; ////7.8125 m°C/LSB = 0.0078125 °C/LSB
+
+	*temp = (float)temp_signed * temp_LSB;
+
+	return HAL_OK;
+}
