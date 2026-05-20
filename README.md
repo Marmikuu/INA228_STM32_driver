@@ -20,10 +20,6 @@ The driver was implemented based on the official datasheet and designed for STM3
   <img src="Images/Hardware.jpeg" width="700"><br>
   <em>INA228 sensor board </em>
 </p>
-The driver was tested on:
-
-- STM32L476RG Nucleo devboard
-- Adafruit's INA228 sensor board
 
 
 Limitations:
@@ -56,13 +52,13 @@ The plot shows measured current and RPM speed.
 
 <p align="center">
   <img src="Images/DC_motor_demo.png" width="700"><br>
-  <em>Figure 2. DC motor current measurements along with PID control (AVG = 128 )</em>
+  <em>Figure 2. DC motor current measurements along with PID control (AVG = 1 )</em>
 </p>  
 
 
 <p align="center">
   <img src="Images/DC_motor_demo2.png" width="700"><br>
-  <em>Figure 3. DC motor current measurements along with PID control (AVG = 1 )</em>
+  <em>Figure 3. DC motor current measurements along with PID control (AVG = 128 )</em>
 </p>  
 
 
