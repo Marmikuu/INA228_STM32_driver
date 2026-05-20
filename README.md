@@ -48,7 +48,7 @@ Sampling time: 50 ms
 <p align="center">
   <img src="Images/figure.png" width="700"><br>
   <em>Figure 1. Li-Ion cell measurements</em>
-</p>
+</p>  
 
 
 Example 2: measurement of a DC motor power supply under diffent load conditions. 
@@ -56,14 +56,14 @@ The plot shows measured current and RPM speed.
 
 <p align="center">
   <img src="Images/DC_motor_demo.png" width="700"><br>
-  <em>Figure 2. DC motor current measurements along with PID control</em>
-</p>
+  <em>Figure 2. DC motor current measurements along with PID control (AVG = 128 )</em>
+</p>  
 
 
 <p align="center">
   <img src="Images/DC_motor_demo2.png" width="700"><br>
-  <em>Figure 2. DC motor current measurements along with PID control</em>
-</p>
+  <em>Figure 3. DC motor current measurements along with PID control (AVG = 1 )</em>
+</p>  
 
 
 
