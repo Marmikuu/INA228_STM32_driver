@@ -15,8 +15,11 @@ The driver was implemented based on the official datasheet and designed for STM3
 
 # Hardware
 
-![INA228 board](Images/Hardware.jpeg)
 
+<p align="center">
+  <img src="Images/Hardware.jpeg" width="700"><br>
+  <em>INA228 sensor board </em>
+</p>
 The driver was tested on:
 
 - STM32L476RG Nucleo devboard
@@ -31,9 +34,40 @@ According to the datasheet, the device is designed for DC or slowly varying sign
 
 # Demo
 
-Example measurement of a Li-Ion cell during discharge under diffent load conditions. 
+Example 1: measurement of a Li-Ion cell during discharge under diffent load conditions. 
 The plot shows measured current and bus voltage. The dynamic response of the cell under varying load is visible.
+
+The driver was tested on:
+
+- STM32L476RG Nucleo devboard
+- Adafruit's INA228 sensor board
 
 Sampling time: 50 ms
 
-![Li-Ion cell discharge : Measured current and voltage plot](Images/figure.png)
+
+<p align="center">
+  <img src="Images/figure.png" width="700"><br>
+  <em>Figure 1. Li-Ion cell measurements</em>
+</p>
+
+
+Example 2: measurement of a DC motor power supply under diffent load conditions. 
+The plot shows measured current and RPM speed.
+
+<p align="center">
+  <img src="Images/DC_motor_demo.png" width="700"><br>
+  <em>Figure 2. DC motor current measurements along with PID control</em>
+</p>
+
+
+<p align="center">
+  <img src="Images/DC_motor_demo2.png" width="700"><br>
+  <em>Figure 2. DC motor current measurements along with PID control</em>
+</p>
+
+
+
+The driver was tested on:
+
+- STM32L476RG Nucleo devboard
+- Adafruit's INA228 sensor board
